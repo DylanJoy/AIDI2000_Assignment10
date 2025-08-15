@@ -7,4 +7,4 @@ Visual Product Classifier + QA Bot
 
 
 Sreeashish Devaki Jaffer Sathick - 100949205
-Osman El-Alawa - 100991348
+Damilola Osidein - 100747486
