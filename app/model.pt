@@ -1,0 +1,25 @@
+# app/main.py
+from pathlib import Path
+from fastapi import FastAPI
+import torch
+
+app = FastAPI()
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "model.pt"
+
+# Lazy-load so the import doesn't crash if the file is missing
+model = None
+
+@app.on_event("startup")
+def load_model():
+    global model
+    if MODEL_PATH.exists():
+        model = torch.load(MODEL_PATH, map_location="cpu")
+    else:
+        # Don't crash; service can still start and show /docs
+        print(f"WARNING: model file not found at {MODEL_PATH}")
+
+@app.get("/")
+def health():
+    return {"ok": model is not None}
