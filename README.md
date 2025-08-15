@@ -7,6 +7,8 @@ Visual Product Classifier + QA Bot
 
 
 Sreeashish Devaki Jaffer Sathick - 100949205
+
+
 Dylan Joy - 100653103
 
 
