@@ -1,0 +1,29 @@
+# cloudbuild.yaml
+substitutions:
+  _REGION: "us-central1"
+  _SERVICE: "aidi2000-assignment10"
+  _IMAGE: "us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run/aidi2000-assignment10:$COMMIT_SHA"
+
+steps:
+  # Build with Buildpacks and PUSH the image
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: bash
+    args:
+      - -c
+      - >
+        gcloud builds submit
+        --pack image=${_IMAGE}
+
+  # (Optional) Deploy to Cloud Run so you get a URL every push
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_SERVICE}
+      - --image=${_IMAGE}
+      - --region=${_REGION}
+      - --allow-unauthenticated
+
+images:
+  - ${_IMAGE}
