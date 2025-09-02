@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # visual_product_classifier
 =======
 # AIDI2000_Assignment10
